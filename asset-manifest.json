@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Drone-Flight-Analyzer/static/css/main.cfa9a919.css",
+    "main.js": "/Drone-Flight-Analyzer/static/js/main.0cfbd956.js",
+    "static/js/787.a8a8190a.chunk.js": "/Drone-Flight-Analyzer/static/js/787.a8a8190a.chunk.js",
+    "index.html": "/Drone-Flight-Analyzer/index.html",
+    "main.cfa9a919.css.map": "/Drone-Flight-Analyzer/static/css/main.cfa9a919.css.map",
+    "main.0cfbd956.js.map": "/Drone-Flight-Analyzer/static/js/main.0cfbd956.js.map",
+    "787.a8a8190a.chunk.js.map": "/Drone-Flight-Analyzer/static/js/787.a8a8190a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cfa9a919.css",
+    "static/js/main.0cfbd956.js"
+  ]
+}
