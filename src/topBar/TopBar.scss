@@ -1,0 +1,29 @@
+@import "../variables.scss";
+
+.topBar {
+  background-color: $color2;
+  padding: $spacing / 2;
+
+
+  .topBarButton {
+    margin-left: $spacing;
+    margin-right: $spacing;
+
+    background-color: $color2;
+    border-radius: $spacing;
+    border: none;
+
+    color: $textColor;
+    font-size: 2em;
+    transition-duration: 0.2s;
+
+    &:hover {
+      background-color: $color3;
+    }
+
+    &:active {
+      background-color: $color4;
+    }
+
+  }
+}

@@ -1,0 +1,33 @@
+body {
+  background-color: #252525;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  font-family: "Century Gothic", Futura, sans-serif;
+  color: white;
+}
+
+.topBar {
+  background-color: #3f3f3f;
+  padding: 5px;
+}
+.topBar .topBarButton {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #3f3f3f;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-size: 2em;
+  transition-duration: 0.2s;
+}
+.topBar .topBarButton:hover {
+  background-color: #585858;
+}
+.topBar .topBarButton:active {
+  background-color: #727272;
+}
+
+/*# sourceMappingURL=TopBar.css.map */

@@ -1,0 +1,22 @@
+$color1: #252525;
+$color2: lighten($color1, 10);
+$color3: lighten($color2, 10);
+$color4: lighten($color3, 10);
+$color5: lighten($color4, 10);
+
+$textColor: white;
+
+$H1: 10px;
+
+$spacing: 10px;
+
+body {
+  background-color: $color1;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  font-family: "Century Gothic", Futura, sans-serif;
+  color: $textColor;
+}
