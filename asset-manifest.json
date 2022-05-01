@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Drone-Flight-Analyzer/static/css/main.cfa9a919.css",
-    "main.js": "/Drone-Flight-Analyzer/static/js/main.0cfbd956.js",
+    "main.css": "/Drone-Flight-Analyzer/static/css/main.3221c976.css",
+    "main.js": "/Drone-Flight-Analyzer/static/js/main.e38cc38c.js",
     "static/js/787.a8a8190a.chunk.js": "/Drone-Flight-Analyzer/static/js/787.a8a8190a.chunk.js",
     "index.html": "/Drone-Flight-Analyzer/index.html",
-    "main.cfa9a919.css.map": "/Drone-Flight-Analyzer/static/css/main.cfa9a919.css.map",
-    "main.0cfbd956.js.map": "/Drone-Flight-Analyzer/static/js/main.0cfbd956.js.map",
+    "main.3221c976.css.map": "/Drone-Flight-Analyzer/static/css/main.3221c976.css.map",
+    "main.e38cc38c.js.map": "/Drone-Flight-Analyzer/static/js/main.e38cc38c.js.map",
     "787.a8a8190a.chunk.js.map": "/Drone-Flight-Analyzer/static/js/787.a8a8190a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cfa9a919.css",
-    "static/js/main.0cfbd956.js"
+    "static/css/main.3221c976.css",
+    "static/js/main.e38cc38c.js"
   ]
 }
