@@ -1,0 +1,8 @@
+@use "Variables";
+
+.canvasHolder {
+
+  width: available;
+  flex-grow: 1;
+  border: Variables.$spacing * 2;
+}

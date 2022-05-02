@@ -1,0 +1,13 @@
+@use "Variables";
+
+
+.overviewGrid {
+  display: grid;
+  padding: Variables.$spacing;
+  grid-gap: Variables.$spacing;
+
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  //background-color: red;
+}
+

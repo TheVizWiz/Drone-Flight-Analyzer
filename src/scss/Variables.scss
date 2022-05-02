@@ -6,15 +6,36 @@ $color5: lighten($color4, 10);
 
 $textColor: white;
 
-$H1: 10px;
+$H1: 2vw;
+$H2: 1.7vw;
+$H3: 1.25vw;
+$H4: 1vw;
+$H5: 0.75vw;
+$H6: 0.5vw;
 
 $spacing: 10px;
+
+html, body, #root,{
+  height: 100%;
+  margin: 0;
+}
+
 
 body {
   background-color: $color1;
   padding: 0;
   margin: 0;
+  height: 100%;
 }
+
+
+.app {
+  display: grid;
+  .page {
+    flex-grow: 1;
+  }
+}
+
 
 * {
   font-family: "Century Gothic", Futura, sans-serif;

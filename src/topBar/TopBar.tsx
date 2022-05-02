@@ -1,29 +1,16 @@
-import React, {ReactNode} from "react";
+import React, {ReactNode, useContext} from "react";
 import "./TopBar.scss"
 import TopBarButton from "./TopBarButton";
+import {DroneDataContext} from "../data/DroneDataContext";
 
-export default class TopBar extends React.Component<any, any> {
 
-    constructor (props: object) {
-        super(props);
+export default function TopBar (props: any) {
+
+    function handleClick (i: number) {
+        props.switchPages(i);
     }
 
-    render () {
-        let list = [];
-        for (let i = 0; i < this.props.pageNumbers.length; i++) {
-            list.push(this.createClassButton(this.props.pageNumbers[i], this.props.pageHeaders[i],
-                (i: number) => this.handleClick(i)));
-        }
-
-        return (
-            <div className={"topBar"}>
-                {list}
-            </div>
-        );
-    }
-
-
-    createClassButton (i: number, text: string, onClickFunction: (i: number) => void): ReactNode {
+    function createClassButton (i: number, text: string, onClickFunction: (i: number) => void): ReactNode {
         return (
             <TopBarButton
                 buttonPosition={i}
@@ -34,7 +21,18 @@ export default class TopBar extends React.Component<any, any> {
         );
     }
 
-    handleClick (i: number) {
-        this.props.switchPages(i);
+    let list = [];
+    for (let i = 0; i < props.pageNumbers.length; i++) {
+        list.push(createClassButton(props.pageNumbers[i], props.pageHeaders[i],
+            (i: number) => handleClick(i)));
     }
+
+    return (
+        <div className={"topBar"}>
+            {list}
+        </div>
+    );
+
+
 }
+

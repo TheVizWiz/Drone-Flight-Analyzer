@@ -1,9 +1,6 @@
-import React, {Component} from "react";
+import React from "react";
 
 
-export default class GraphPage extends Component<any, any> {
-    render () {
-        return <div>Graphs</div>;
-    }
-
+export default function GraphPage () {
+    return <div className={"page"}>Graphs</div>;
 }

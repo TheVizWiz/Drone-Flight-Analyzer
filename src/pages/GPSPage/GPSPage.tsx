@@ -1,9 +1,6 @@
-import React, {Component} from "react";
+import React from "react";
 
 
-export default class GPSPage extends Component<any, any> {
-    render () {
-        return <div>GPS Page</div>;
-    }
-
+export default function GPSPage () {
+    return <div className={"page"}>GPS Page</div>;
 }

@@ -1,0 +1,55 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: #252525;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.app {
+  display: grid;
+}
+.app .page {
+  flex-grow: 1;
+}
+
+* {
+  font-family: "Century Gothic", Futura, sans-serif;
+  color: white;
+}
+
+.panel {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #3f3f3f;
+  display: flex;
+  flex-direction: column;
+  transition-duration: 0.2s;
+}
+.panel .titleText {
+  text-align: center;
+  font-size: 1.7vw;
+  font-weight: bold;
+  user-select: none;
+}
+.panel .content {
+  height: 300%;
+  padding: 0;
+  margin: 0;
+}
+.panel .content:first-child {
+  margin: 0;
+  padding: 0;
+}
+.panel .content .svg {
+  height: 100%;
+  width: 100%;
+  viewBox: 0 0 0 0;
+}
+
+/*# sourceMappingURL=Panel.css.map */
