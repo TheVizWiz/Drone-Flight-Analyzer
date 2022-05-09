@@ -1,56 +1,63 @@
-import React, {ReactNode, useEffect, useState} from 'react';
-import TopBar from "./topBar/TopBar";
-import NetworkPage from "./pages/NetworkPage/NetworkPage";
+import {ReactElement, useEffect, useState} from "react";
+import 'scss/Variables.scss';
+import {DroneData, DroneDataContext, UPDATE_TIME,} from './data/DroneData';
 import OverviewPage from "./pages/OverviewPage/OverviewPage";
 import GraphPage from "./pages/GraphPage/GraphPage";
+import NetworkPage from "./pages/NetworkPage/NetworkPage";
 import GPSPage from "./pages/GPSPage/GPSPage";
-import "scss/Variables.scss"
-import {DroneDataContext, DroneData, updateData} from "./data/DroneDataContext";
-import {fdatasync} from "fs";
-import {randFloat} from "three/src/math/MathUtils";
+import TopBar from "./topBar/TopBar";
+import {isConnected, reconnect, updateDataFromNetwork} from "./data/NetworkController";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
+import {DataMode, getCurrentMode} from "./data/DataMode";
 
 
-export default function App (props: any) {
-    let [currentPage, setCurrentPage] = useState(0);
-    let pageNumbers = [0, 1, 2, 3, 4];
-    let pageHeaders = ["Overview", "Graphs", "Network Diagnostics", "GPS Tracking (beta)"];
-    let pages = [<OverviewPage/>, <GraphPage/>, <NetworkPage/>, <GPSPage/>];
+export default function App (): ReactElement {
 
-    let [count, setCount] = useState(0);
+	let [settingsIsShown, setSettingsVisibility] = useState(false);
+	const [currentPage, setCurrentPage] = useState(0);
+	const pageNumbers = [0, 1, 2, 3, 4];
+	const pageHeaders = [
+		'Overview',
+		'Graphs',
+		'Network Diagnostics',
+		'GPS Tracking (beta)',
+	];
+	const pages = [<OverviewPage/>, <GraphPage/>, <NetworkPage/>, <GPSPage/>];
 
-    useEffect(() => {
-        setInterval(() => {
-            // console.log(DroneData)
-            updateData({
-                time: DroneData.time[DroneData.time.length - 1] + 0.05,
-                battery: randFloat(90, 100),
-                network: randFloat(90, 100),
-                payload: randFloat(90, 100),
-                pitch: randFloat(90, 100),
-                radio: randFloat(90, 100),
-                roll: randFloat(90, 100),
-                state: randFloat(90, 100),
-                yaw: randFloat(90, 100)
-            });
-            setCount(count => count + 1);
-        }, 50)
-    }, [])
+	const [count, setCount] = useState(0);
+
+	if (!isConnected) {
+		reconnect();
+	}
 
 
+	useEffect(() => {
+		setInterval(() => {
+			if (getCurrentMode() === DataMode.PLAIN || getCurrentMode() === DataMode.RECORDING)
+				updateDataFromNetwork();
+			// else
+			// 	console.log(DroneData);
+			setCount(count => count + 1);
+		}, UPDATE_TIME);
+	}, []);
 
-    return (
-        <DroneDataContext.Provider value={count}>
-            <div className={"app"}>
-                <TopBar pageNumbers={pageNumbers}
-                        pageHeaders={pageHeaders}
-                        currentPage={currentPage}
-                        switchPages={(i: number) => setCurrentPage(i)}/>
-                {pages[currentPage]}
-            </div>
-        </DroneDataContext.Provider>
-    );
+	return (
+		<DroneDataContext.Provider value={count}>
+			<div className="app">
+				<TopBar
+					pageNumbers={pageNumbers}
+					pageHeaders={pageHeaders}
+					currentPage={currentPage}
+					switchPages={(i: number) => {
+						setCurrentPage(i);
+						setSettingsVisibility(false);
+					}}
+					openSettingsPage={() => {
+						setSettingsVisibility(settings => !settings);
+					}}
+				/>
+				{settingsIsShown ? <SettingsPage/> : pages[currentPage]}
+			</div>
+		</DroneDataContext.Provider>
+	);
 }
-
-
-
-

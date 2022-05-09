@@ -5,9 +5,9 @@
   display: grid;
   padding: Variables.$spacing;
   grid-gap: Variables.$spacing;
-
+  //
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 7.25vh);
   //background-color: red;
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./TopBar.scss"
+import "../scss/TopBar.scss"
 
 
 export default class TopBarButton extends React.Component<any, any> {

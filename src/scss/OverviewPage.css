@@ -8,13 +8,7 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-}
-
-.app {
-  display: grid;
-}
-.app .page {
-  flex-grow: 1;
+  overflow: hidden;
 }
 
 * {
@@ -27,7 +21,7 @@ body {
   padding: 10px;
   grid-gap: 10px;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 7.25vh);
 }
 
 /*# sourceMappingURL=OverviewPage.css.map */
