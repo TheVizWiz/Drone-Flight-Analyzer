@@ -47,7 +47,6 @@ export function reconnect () {
 			isConnected = false;
 		}
 		socket.onerror = () => {
-			console.log("error");
 			isConnecting = false;
 			isConnected = false;
 		};

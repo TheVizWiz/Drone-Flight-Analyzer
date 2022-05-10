@@ -1,5 +1,7 @@
 import "scss/Variables.scss";
-import {VictoryAxis, VictoryChart, VictoryLabel, VictoryLine, VictoryTheme, VictoryThemeDefinition} from "victory";
+import {VictoryChart, VictoryLine, VictoryThemeDefinition} from "victory";
+import {DataMode, getCurrentMode} from "../../data/DataMode";
+import {dataLimits, DroneData} from "../../data/DroneData";
 
 
 interface ChartPanelProps {
@@ -60,11 +62,29 @@ export default function ChartPanel (props: ChartPanelProps) {
 		if (i > currentMax) currentMax = i;
 	})
 
+	let minDomain = {};
+	let maxDomain = {};
+	if (props.yLim) { // @ts-ignore
+		minDomain.y = props.yLim[0];
+		// @ts-ignore
+		maxDomain.y = props.yLim[1];
+	}
+
+	if (getCurrentMode() === DataMode.READING_FROM_FILE) {
+		// @ts-ignore
+		minDomain.x = DroneData.time[Math.round(dataLimits[0] * DroneData.time.length - 1)];
+		// @ts-ignore
+		maxDomain.x = DroneData.time[Math.round(dataLimits[1] * DroneData.time.length - 1)];
+	}
+
+
+
+
 
 	return (
 		<VictoryChart theme={theme} style={{parent: {height: '100%', width: "100%"}}}
-					  minDomain={props.yLim ? {y: props.yLim[0]} : {}}
-					  maxDomain={props.yLim ? {y: props.yLim[1]} : {}}>
+					  minDomain={minDomain}
+					  maxDomain={maxDomain}>
 			<VictoryLine data={data}/>
 		</VictoryChart>
 	);

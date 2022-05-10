@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 import "../scss/TopBar.scss";
 import TopBarButton from "./TopBarButton";
-import {isRecording, recordButton, resetData, startRecording, stopRecording} from "../data/DroneData";
+import {flagResetLimits, isRecording, recordButton, resetData, startRecording, stopRecording} from "../data/DroneData";
 import {parseInputCSV} from "../data/FileController";
 import {resetNetworkConnection} from "../data/NetworkController";
 import {DataMode, getCurrentMode, setCurrentMode} from "../data/DataMode";
@@ -30,21 +30,36 @@ export default function TopBar (props: any) {
 			(i: number) => handleClick(i)));
 	}
 
+
 	return (
 		<div className={"topBar"}>
 			<div className={"topBarPageElements"}>
 				{list}
 			</div>
 			<div className="topBarPlaybackElements">
+				{
+					(getCurrentMode() === DataMode.READING_FROM_FILE)
+						? <TopRightButton altString={"close view"} handleClick={() => {
+							setCurrentMode(DataMode.PLAIN);
+							resetData();
+						}} imgFile={"close-icon.png"}/>
+						: <></>
+
+				}
+
+
 				<TopRightButton imgFile={recordButton}
 								altString={(isRecording ? "start" : "stop") + "recording"} handleClick={
 					() => isRecording ? stopRecording() : startRecording()
 				}/>
 				<TopRightButton imgFile={"reload-icon.png"} altString={"reload data"} handleClick={
 					() => {
-						resetData();
-						if (getCurrentMode() === DataMode.READING_FROM_FILE)
-							setCurrentMode(DataMode.PLAIN);
+						if (getCurrentMode() === DataMode.READING_FROM_FILE) {
+							flagResetLimits();
+						} else {
+							resetData();
+
+						}
 					}
 				}/>
 
@@ -61,9 +76,11 @@ export default function TopBar (props: any) {
 					e.target.files[0].text().then(text => {
 						parseInputCSV(text);
 					})
+					e.target.value = "";
 				}} hidden={true}/>
 				<TopRightButton imgFile={"upload-icon.png"} altString={"upload file"} handleClick={
 					() => {
+						flagResetLimits();
 						// @ts-ignore
 						document.getElementById("fileInputID").click();
 					}

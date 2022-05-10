@@ -26,10 +26,22 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  overflow: hidden;
 }
 
 
+.sliderContainer {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 12fr 1fr;
+
+  .sliderValues {
+    font-size: $H3;
+    margin: 0 auto;
+    text-align: center;
+    height: fit-content;
+  }
+}
 
 
 * {

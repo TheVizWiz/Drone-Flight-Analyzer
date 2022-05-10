@@ -11,6 +11,8 @@ export const UPDATE_TIME = 1000 / NUM_UPDATES_PER_SECOND;
 
 export let isRecording: boolean = false;
 export let recordButton: string = "record-icon.png";
+export let dataLimits: Array<number> = [0, 1];
+let limitsNeedResetting: boolean = false;
 let currentRecording = "";
 
 export const DroneData = {
@@ -98,16 +100,19 @@ export function resetData () {
 }
 
 export function checkDataLength () {
-	if (DroneData.time.length <= NUM_UPDATES_TO_KEEP) return;
-	DroneData.time.shift();
-	DroneData.pitch.shift();
-	DroneData.roll.shift();
-	DroneData.yaw.shift();
-	DroneData.battery.shift();
-	DroneData.network.shift();
-	DroneData.radio.shift();
-	DroneData.payload.shift();
-	DroneData.state.shift();
+	let count = 0;
+	while ((DroneData.time[DroneData.time.length - 1] > (DroneData.time[0] + UPDATE_TIME_TO_KEEP)) && count < 3) {
+		DroneData.time.shift();
+		DroneData.pitch.shift();
+		DroneData.roll.shift();
+		DroneData.yaw.shift();
+		DroneData.battery.shift();
+		DroneData.network.shift();
+		DroneData.radio.shift();
+		DroneData.payload.shift();
+		DroneData.state.shift();
+		count++
+	}
 }
 
 
@@ -127,4 +132,21 @@ function getFileName (): string {
 	let sec = new Intl.DateTimeFormat("en", {second: "2-digit"}).format(d);
 
 	return `DroneData-${ye}-${mo}-${da}-${ho}-${min}-${sec}.csv`;
+}
+
+export function needToResetLimits () {
+	return limitsNeedResetting;
+}
+
+export function flagResetLimits () {
+	limitsNeedResetting = true;
+}
+
+export function resetLimits () {
+	if (!limitsNeedResetting)
+		return;
+
+	dataLimits[0] = 0;
+	dataLimits[1] = 1;
+	limitsNeedResetting = false;
 }

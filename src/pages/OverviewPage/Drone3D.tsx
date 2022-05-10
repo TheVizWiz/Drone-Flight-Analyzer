@@ -1,15 +1,22 @@
-import React, { useContext, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import React, {useRef, useState} from "react";
+import {Canvas, useFrame} from "@react-three/fiber";
 import "scss/Drone3D.scss";
-import {DroneData} from "../../data/DroneData";
+import {dataLimits, DroneData} from "../../data/DroneData";
+import {DataMode, getCurrentMode} from "../../data/DataMode";
 
 export default function Drone3D (props: any) {
+
+	let currentFrame = (getCurrentMode() === DataMode.READING_FROM_FILE)
+		? Math.floor(DroneData.time.length * dataLimits[1] - 1)
+		: DroneData.time.length - 1;
+
+
 	return (
 		<Canvas>
 			<ambientLight />
 			<pointLight position={[10, 10, 10]} />
-			<Box position={[-1.2, 0, 0]} rotation={DroneData.roll[DroneData.roll.length - 1]} />
-			<Box position={[1.2, 0, 0]} rotation={-DroneData.roll[DroneData.roll.length - 1]} />
+			<Box position={[-1.2, 0, 0]} rotation={DroneData.roll[currentFrame]} />
+			<Box position={[1.2, 0, 0]} rotation={-DroneData.roll[currentFrame]} />
 		</Canvas>
 	);
 }
